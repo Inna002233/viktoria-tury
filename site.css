@@ -158,6 +158,7 @@
     display: grid; place-items: center; text-align: center; padding: 20px; font-size: 17px;
   }
   .photo-slot svg { width: 64px; height: 64px; margin: 0 auto 12px; opacity: .85; }
+  .about-photo { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); border: 6px solid rgba(255,255,255,.9); box-shadow: 0 20px 50px rgba(0,40,55,.3); transform: rotate(-2deg); }
   .about .kicker { color: var(--sun); }
   .about p { margin-bottom: 16px; font-size: 18px; }
   .facts { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 28px; }
@@ -197,6 +198,7 @@
       linear-gradient(180deg, rgba(0, 70, 90, .55), rgba(0, 70, 90, .65)),
       url('https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?w=1920&q=75') center/cover no-repeat;
   }
+  .final-avatar { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; border: 5px solid var(--sun); box-shadow: 0 10px 30px rgba(0,0,0,.3); }
   .final h2 { font-size: clamp(30px, 6vw, 52px); }
   .final p { font-size: 20px; max-width: 600px; margin: 0 auto 32px; }
 
@@ -221,7 +223,7 @@
     .cards3, .steps, .reviews-grid { grid-template-columns: 1fr; }
     .promise-grid { grid-template-columns: repeat(2, 1fr); }
     .about-grid { grid-template-columns: 1fr; gap: 32px; }
-    .photo-slot { max-width: 340px; width: 100%; margin: 0 auto; }
+    .about-photo { max-width: 340px; margin: 0 auto; }
   }
   @media (max-width: 640px) {
     section { padding: 60px 0; }
