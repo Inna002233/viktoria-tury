@@ -1,0 +1,20 @@
+/* Фирменный стиль Lady on Travel.
+   Подключение шрифтов:
+   <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;700&family=Yeseva+One&display=swap" rel="stylesheet">
+*/
+:root {
+  --brand-ink: #10263B;
+  --brand-bg: #F1F6F6;
+  --brand-surface: #FFFFFF;
+  --brand-accent: #C93A5A;
+  --brand-accent-dark: #A82C48;
+  --brand-accent-2: #0B7C84;
+  --brand-sun: #F2B94B;
+  --brand-muted: #5B6B7B;
+  --brand-line: #D5E2E3;
+
+  --font-heading: 'Yeseva One', Georgia, serif;
+  --font-body: 'Golos Text', system-ui, sans-serif;
+
+  --brand-radius: 14px;
+}

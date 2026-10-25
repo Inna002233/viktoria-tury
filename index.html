@@ -2,122 +2,557 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="robots" content="noindex, nofollow" data-publish>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Виктория — туры из Петербурга</title>
-<meta name="description" content="Виктория, турагент Lady on Travel в Санкт-Петербурге. Подберу тур на море: Мальдивы, Турция, Египет, Марокко и не только.">
+<meta name="theme-color" content="#10263B">
+<!-- Пока сайт черновик, поисковики его не индексируют. При запуске удалите следующую строку. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Виктория - туры из Петербурга</title>
+<meta name="description" content="Виктория, турагент и руководитель отдела продаж агентства Lady on Travel в Санкт-Петербурге. Подберу тур на море: Мальдивы, Турция, Египет, Марокко и не только.">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css?v=2">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;700&family=Yeseva+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--brand-ink);
+    background: var(--brand-bg);
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: var(--font-heading); font-weight: 400; line-height: 1.15; }
+  h1 { font-size: clamp(36px, 6vw, 62px); }
+  h2 { font-size: clamp(30px, 4.6vw, 46px); margin-bottom: 16px; }
+  h3 { font-size: 24px; margin-bottom: 8px; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: clamp(56px, 9vw, 104px) 0; }
+  .lead { font-size: 19px; color: var(--brand-muted); max-width: 580px; }
+  :focus-visible { outline: 3px solid var(--brand-sun); outline-offset: 3px; }
+  .on-dark :focus-visible, .dark :focus-visible { outline-color: var(--brand-sun); }
+  main :focus-visible { outline-color: var(--brand-accent-2); }
+
+  /* Кнопки */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: 52px; padding: 0 28px; border-radius: 999px;
+    font: 700 17px var(--font-body); text-decoration: none; cursor: pointer;
+    border: 2px solid transparent; transition: background .15s, color .15s, border-color .15s;
+  }
+  .btn svg { width: 22px; height: 22px; flex-shrink: 0; }
+  .btn-primary { background: var(--brand-accent); color: #fff; }
+  .btn-primary:hover { background: var(--brand-accent-dark); }
+  .btn-outline { border-color: var(--brand-ink); color: var(--brand-ink); background: transparent; }
+  .btn-outline:hover { background: var(--brand-ink); color: #fff; }
+  .btn-outline.light { border-color: rgba(255,255,255,.8); color: #fff; }
+  .btn-outline.light:hover { background: #fff; color: var(--brand-ink); }
+  .btn-light { background: #fff; color: var(--brand-ink); }
+  .btn-light:hover { background: var(--brand-sun); }
+  .btn-small { min-height: 44px; padding: 0 20px; font-size: 16px; }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 14px; }
+
+  /* Шапка */
+  .top { position: absolute; top: 0; left: 0; right: 0; z-index: 5; padding: 18px 0; color: #fff; }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .brandmark { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brandmark img { width: 42px; height: 42px; }
+  .brandmark b { display: block; font: 400 22px/1.1 var(--font-heading); }
+  .brandmark span { display: block; font-size: 15px; color: rgba(255, 255, 255, .82); }
+  .top-phone { font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+  .top-phone svg { width: 20px; height: 20px; color: var(--brand-sun); }
+
+  /* Первый экран */
+  .hero { padding: 128px 0 clamp(64px, 8vw, 104px); color: #fff; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
+  .hero h1 { margin-bottom: 20px; }
+  .hero .sub { font-size: clamp(18px, 2.2vw, 21px); color: #E3F0F3; max-width: 520px; margin-bottom: 32px; }
+  .hero-note { margin-top: 16px; font-size: 16px; color: #C9DDE2; }
+
+  /* Посадочный талон */
+  .pass {
+    background: var(--brand-surface); color: var(--brand-ink); border-radius: 22px; max-width: 470px; margin-left: auto; width: 100%;
+    box-shadow: 0 26px 60px rgba(16, 38, 59, .18); transform: rotate(-1.2deg);
+    animation: deal .8s cubic-bezier(.2, .8, .2, 1) both;
+  }
+  @keyframes deal { from { opacity: 0; transform: translateY(22px) rotate(-3deg); } to { opacity: 1; transform: rotate(-1.2deg); } }
+  .pass-head { display: flex; align-items: center; gap: 10px; padding: 16px 24px; background: var(--brand-ink); color: #fff; border-radius: 22px 22px 0 0; }
+  .pass-head img { width: 28px; height: 28px; }
+  .pass-head b { font: 400 18px var(--font-heading); }
+  .pass-head span { margin-left: auto; font-size: 15px; opacity: .8; }
+  .pass-body { padding: 22px 24px 20px; }
+  .route { display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 8px; }
+  .leg { display: flex; flex-direction: column; min-width: 0; }
+  .leg.to { text-align: right; align-items: flex-end; }
+  .leg-label { font-size: 14px; color: var(--brand-muted); }
+  .leg-code { font: 400 clamp(42px, 8vw, 60px)/1 var(--font-heading); color: var(--brand-ink); letter-spacing: .02em; }
+  .leg-code { display: block; }
+  .leg.to .leg-code { color: var(--brand-accent); }
+  .leg-name { font-weight: 700; font-size: 16px; line-height: 1.25; }
+  .route-path { position: relative; align-self: center; width: clamp(40px, 9vw, 84px); height: 36px; margin-bottom: 18px; }
+  .route-path::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 2px dashed var(--brand-line); }
+  .route-path svg { position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; transform: translate(-50%, -50%) rotate(45deg); color: var(--brand-accent-2); background: var(--brand-surface); padding: 3px; }
+  .flip { animation: flip .38s ease both; }
+  @keyframes flip { 0% { transform: rotateX(0); } 50% { transform: rotateX(-88deg); } 100% { transform: rotateX(0); } }
+  .dest-line { margin: 14px 0 18px; font-size: 16px; color: var(--brand-muted); min-height: 52px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1.5px solid var(--brand-line);
+    background: #fff; color: var(--brand-ink); font: 500 16px var(--font-body); cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .chip:hover { border-color: var(--brand-ink); }
+  .chip[aria-pressed="true"] { background: var(--brand-ink); border-color: var(--brand-ink); color: #fff; }
+  .fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--brand-line); }
+  .field span { display: block; font-size: 13px; color: var(--brand-muted); }
+  .field b { display: block; font-size: 15px; line-height: 1.3; font-weight: 500; }
+  .stub { position: relative; padding: 22px 24px 24px; border-top: 2px dashed var(--brand-line); }
+  .stub::before, .stub::after {
+    content: ""; position: absolute; top: -13px; width: 24px; height: 24px; border-radius: 50%; background: rgba(5, 40, 56, .92);
+  }
+  .stub::before { left: -12px; }
+  .stub::after { right: -12px; }
+  .stub .btn { width: 100%; }
+
+  /* С чем приходят */
+  .situations { display: grid; gap: clamp(36px, 6vw, 72px); margin-top: 48px; }
+  .situation { display: grid; grid-template-columns: 1fr 300px; gap: clamp(24px, 5vw, 64px); align-items: center; }
+  .situation:nth-child(even) { grid-template-columns: 300px 1fr; }
+  .situation:nth-child(even) .situation-photo { order: -1; }
+  .situation q { display: block; font: 400 clamp(26px, 3.4vw, 36px)/1.2 var(--font-heading); quotes: none; margin-bottom: 14px; }
+  .situation p { color: var(--brand-muted); max-width: 520px; }
+  .situation-photo { aspect-ratio: 3 / 4; border-radius: 150px 150px 18px 18px; overflow: hidden; background: var(--brand-line); }
+  .situation-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* Табло направлений */
+  .dark { background: var(--brand-ink); color: #E8F0F2; }
+  .dark .lead { color: #AFC2C8; }
+  .board { list-style: none; margin-top: 44px; border-top: 1px solid rgba(255,255,255,.18); }
+  .board li {
+    display: grid; grid-template-columns: 84px 190px 1fr 190px 130px; gap: 20px; align-items: center;
+    padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,.18);
+  }
+  .board .code { font-weight: 700; font-size: 20px; letter-spacing: .14em; color: var(--brand-sun); }
+  .board .name { font: 400 26px/1.15 var(--font-heading); color: #fff; }
+  .board .desc { font-size: 17px; color: #C6D5D9; }
+  .board .cost { font-size: 16px; color: #AFC2C8; }
+  .board-note { margin-top: 28px; color: #C6D5D9; max-width: 640px; }
+
+  /* Шаги */
+  .steps { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; counter-reset: step; }
+  .step { position: relative; padding-top: 76px; counter-increment: step; }
+  .step::before {
+    content: counter(step); position: absolute; top: 0; left: 0; width: 56px; height: 56px; border-radius: 50%;
+    display: grid; place-items: center; background: var(--brand-accent); color: #fff; font: 400 26px var(--font-heading);
+  }
+  .step::after { content: ""; position: absolute; top: 28px; left: 72px; right: -16px; border-top: 2px dashed var(--brand-line); }
+  .step:last-child::after { display: none; }
+  .step p { color: var(--brand-muted); }
+
+  /* Обещания */
+  .promises { background: #fff; border-top: 1px solid var(--brand-line); border-bottom: 1px solid var(--brand-line); padding: 44px 0; }
+  .promise-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+  .promise svg { width: 30px; height: 30px; color: var(--brand-accent-2); margin-bottom: 12px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .promise b { display: block; font-size: 18px; line-height: 1.3; margin-bottom: 6px; }
+  .promise p { font-size: 16px; color: var(--brand-muted); }
+
+  /* Обо мне */
+  .about-grid { display: grid; grid-template-columns: 340px 1fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
+  .photo-slot {
+    aspect-ratio: 4 / 5; border-radius: 170px 170px 18px 18px; border: 2px dashed var(--brand-accent-2);
+    background: #fff; display: grid; place-items: center; text-align: center; padding: 24px; color: var(--brand-muted); font-size: 16px;
+  }
+  .photo-slot svg { width: 60px; height: 60px; margin: 0 auto 10px; color: var(--brand-accent-2); fill: none; stroke: currentColor; stroke-width: 1.5; }
+  .role { font-weight: 700; color: var(--brand-accent-2); margin-bottom: 18px; }
+  .about p { margin-bottom: 14px; max-width: 600px; }
+  .checks { list-style: none; margin-top: 22px; display: grid; gap: 10px; }
+  .checks li { display: flex; gap: 12px; align-items: flex-start; }
+  .checks li::before { content: ""; flex: 0 0 22px; height: 22px; margin-top: 3px; border-radius: 50%; background: var(--brand-accent-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/14px no-repeat; }
+
+  /* Отели в Телеграме */
+  .teal { background: var(--brand-accent-2); color: #fff; }
+  .hotels { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(28px, 6vw, 72px); align-items: center; }
+  .hotels p { font-size: 19px; max-width: 520px; }
+
+  /* Отзывы: 3D-бегущая лента (перенос компонента Marquee) */
+  .sample-note { margin-top: 12px; font-size: 15px; color: var(--brand-accent-dark); font-weight: 500; }
+  .reviews-stage {
+    --stage-bg: var(--brand-bg);
+    position: relative; display: flex; flex-direction: row; align-items: center; justify-content: center;
+    overflow: hidden; gap: .375rem; width: 100%; height: 24rem; margin-top: 36px;
+    border: 1px solid var(--brand-line); border-radius: .5rem; perspective: 300px;
+  }
+  .reviews-tilt {
+    display: flex; flex-direction: row; align-items: center; gap: 1rem;
+    transform: translateX(-100px) translateY(0px) translateZ(-100px) rotateX(20deg) rotateY(-10deg) rotateZ(20deg);
+  }
+  .marquee { --duration: 40s; --gap: 1rem; display: flex; flex-direction: column; overflow: hidden; padding: .5rem; gap: var(--gap); }
+  .marquee-track {
+    display: flex; flex-direction: column; flex-shrink: 0; justify-content: space-around; gap: var(--gap);
+    animation: marquee-vertical var(--duration) linear infinite;
+  }
+  .marquee.reverse .marquee-track { animation-direction: reverse; }
+  .marquee:hover .marquee-track, .marquee:focus-visible .marquee-track, .reviews-stage.paused .marquee-track { animation-play-state: paused; }
+  .motion-btn { margin-top: 16px; }
+  @keyframes marquee-vertical {
+    from { transform: translateY(0); }
+    to { transform: translateY(calc(-100% - var(--gap))); }
+  }
+  .fade { position: absolute; pointer-events: none; }
+  .fade-top { inset-inline: 0; top: 0; height: 25%; background: linear-gradient(to bottom, var(--stage-bg), transparent); }
+  .fade-bottom { inset-inline: 0; bottom: 0; height: 25%; background: linear-gradient(to top, var(--stage-bg), transparent); }
+  .fade-left { inset-block: 0; left: 0; width: 25%; background: linear-gradient(to right, var(--stage-bg), transparent); }
+  .fade-right { inset-block: 0; right: 0; width: 25%; background: linear-gradient(to left, var(--stage-bg), transparent); }
+  .rcard { width: 13.5rem; padding: 1rem; background: #fff; border: 1px solid var(--brand-line); border-radius: .5rem; box-shadow: 0 1px 2px rgba(16, 38, 59, .06); }
+  .rcard figcaption { display: flex; align-items: center; gap: .625rem; }
+  .ravatar { flex: 0 0 2.25rem; width: 2.25rem; height: 2.25rem; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 15px; overflow: hidden; }
+  .ravatar img { width: 100%; height: 100%; object-fit: cover; }
+  .ravatar.c0 { background: #DDEEEF; color: #0B7C84; }
+  .ravatar.c1 { background: #F8DDE4; color: #A82C48; }
+  .ravatar.c2 { background: #E6E0F3; color: #43306F; }
+  .rname { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 .375rem; font-size: 14px; font-weight: 500; line-height: 1.3; }
+  .rname span { font-size: 12px; font-weight: 400; color: var(--brand-muted); }
+  .rcity { font-size: 12px; font-weight: 500; color: var(--brand-muted); line-height: 1.3; }
+  .rcard blockquote { margin-top: .75rem; font-size: 14px; line-height: 1.5; color: var(--brand-ink); }
+
+  /* Вопросы */
+  .faq { background: #fff; }
+  .faq-grid { display: grid; grid-template-columns: 340px 1fr; gap: clamp(28px, 6vw, 80px); }
+  details { border-bottom: 1px solid var(--brand-line); }
+  details:first-child { border-top: 1px solid var(--brand-line); }
+  summary { list-style: none; cursor: pointer; padding: 22px 52px 22px 0; position: relative; font-weight: 700; font-size: 19px; line-height: 1.35; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: "+"; position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%;
+    display: grid; place-items: center; background: var(--brand-bg); color: var(--brand-accent-2); font-size: 24px; font-weight: 500;
+  }
+  details[open] summary::after { content: "\2212"; background: var(--brand-accent-2); color: #fff; }
+  details p { padding: 0 52px 22px 0; color: var(--brand-muted); }
+
+  /* Финал и подвал */
+  .final { text-align: left; }
+  .final-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(28px, 6vw, 72px); align-items: center; }
+  .final h2 { font-size: clamp(34px, 5.4vw, 56px); }
+  .final p { font-size: 20px; color: #C6D5D9; max-width: 480px; }
+
+  /* Фон-шейдер "течения" в финальном блоке */
+  .sea { position: relative; isolation: isolate; overflow: hidden; background: linear-gradient(135deg, #031C26 0%, #1B6CA8 65%, #5AD2F4 100%); }
+  .sea-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; display: block; }
+  .sea::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(3, 28, 38, .8) 0%, rgba(3, 28, 38, .55) 55%, rgba(3, 28, 38, .4) 100%); }
+  .sea .wrap { position: relative; }
+  .sea-btn {
+    position: absolute; right: 20px; bottom: 16px; min-height: 40px; padding: 0 16px; border-radius: 999px;
+    border: 1.5px solid rgba(255, 255, 255, .7); background: rgba(3, 28, 38, .55); color: #fff; font: 500 14px var(--font-body); cursor: pointer;
+  }
+  .sea-btn:hover { background: rgba(3, 28, 38, .85); }
+  .final .btn-row { justify-content: flex-start; }
+  footer { --violet: #43306F; background: var(--violet); color: #DDD5F0; padding: 36px 0 44px; font-size: 16px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; }
+  footer b { color: #fff; }
+  footer a { color: #fff; }
+  .contacts { display: flex; flex-direction: column; gap: 6px; }
+
+  @media (max-width: 960px) {
+    .hero-grid, .about-grid, .hotels, .faq-grid, .final-grid { grid-template-columns: 1fr; }
+    .pass { margin: 0 auto; }
+    .situation, .situation:nth-child(even) { grid-template-columns: 1fr; }
+    .situation-photo, .situation:nth-child(even) .situation-photo { order: -1; max-width: 300px; }
+    .board li { grid-template-columns: 72px 1fr; gap: 6px 16px; padding: 20px 0; }
+    .board .desc, .board .cost { grid-column: 2; }
+    .board .act { grid-column: 2; margin-top: 8px; }
+    .steps { grid-template-columns: 1fr; gap: 28px; }
+    .step { padding: 0 0 0 80px; min-height: 56px; }
+    .step::after { display: none; }
+    .promise-grid { grid-template-columns: repeat(2, 1fr); }
+    .photo-slot { max-width: 320px; width: 100%; }
+  }
+  @media (max-width: 560px) {
+    body { font-size: 17px; }
+    .top-phone span { display: none; }
+    .top-phone { border: 2px solid rgba(255, 255, 255, .8); border-radius: 999px; padding: 0 14px; }
+    .btn-row .btn { width: 100%; }
+    .promise-grid { grid-template-columns: 1fr; }
+    .pass { transform: rotate(-.6deg); }
+    @keyframes deal { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: rotate(-.6deg); } }
+    .pass-body, .stub, .pass-head { padding-left: 18px; padding-right: 18px; }
+    .fields { gap: 8px; }
+    .field b { font-size: 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .pass { animation: none; }
+    .flip { animation: none; }
+  }
+
+  /* ===== v4: фото Виктории и видеообзоры ===== */
+  .about-photo { max-width: 420px; width: 100%; }
+  .final-avatar { width: 112px; height: 112px; border-radius: 50%; object-fit: cover; border: 4px solid var(--brand-sun); margin-bottom: 18px; display: block; }
+  .reels {
+    display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory;
+    padding: 36px max(20px, calc((100vw - 1120px) / 2 + 20px)) 8px;
+    scroll-padding-inline: max(20px, calc((100vw - 1120px) / 2 + 20px));
+    scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.5) transparent;
+  }
+  .reel { flex: 0 0 230px; margin: 0; scroll-snap-align: start; position: relative; }
+  .reel video {
+    width: 100%; height: auto; aspect-ratio: 9 / 16; object-fit: cover; display: block; cursor: pointer;
+    border-radius: 18px; background: rgba(255,255,255,.15); box-shadow: 0 14px 34px rgba(0,30,40,.3);
+  }
+  .reel::after {
+    content: ''; position: absolute; left: 50%; top: calc(50% - 26px); transform: translate(-50%, -50%);
+    width: 62px; height: 62px; border-radius: 50%; pointer-events: none; transition: opacity .2s;
+    background: rgba(255,255,255,.92) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23C93A5A' d='M8 5v14l11-7z'/%3E%3C/svg%3E") 55% 50% / 28px no-repeat;
+  }
+  .reel.playing::after { opacity: 0; }
+  .reel figcaption { margin-top: 10px; font-size: 16px; font-weight: 500; line-height: 1.35; color: #fff; }
+  .reel-country { display: block; font-weight: 700; color: var(--brand-sun); text-transform: uppercase; letter-spacing: .04em; }
+  @media (max-width: 900px) {
+    .about-photo { max-width: 320px; margin: 0 auto; }
+    .reel { flex-basis: 200px; }
+  }
+</style>
 </head>
 <body>
 
-<!-- ================== 1. ПЕРВЫЙ ЭКРАН ================== -->
-<header class="hero">
-  <div class="hero-top">
-    <div class="wrap">
-      <div class="logo">Виктория<small>турагент Lady on Travel</small></div>
-      <a class="top-link" href="#faq">Частые вопросы</a>
-    </div>
-  </div>
-  <video class="hero-video" src="assets/video/hero.mp4" poster="assets/video/hero.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
-  <div class="wrap hero-inner">
-   <div class="hero-text">
-    <h1>Найду вам отпуск, <span>после которого не хочется домой</span></h1>
-    <p class="sub">Я Виктория, турагент из Петербурга. Расскажите, как хотите отдохнуть, а я подберу тур, отель и перелёт. Вы просто собираете чемодан.</p>
-    <a class="btn tg-btn" href="#" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.8 15.3 9.6 19c.4 0 .6-.2.8-.4l2-1.9 4.1 3c.8.4 1.3.2 1.5-.7l2.7-12.7c.3-1.1-.4-1.6-1.1-1.3L3.7 10.8c-1.1.4-1.1 1-.2 1.3l4.1 1.3 9.5-6c.4-.3.9-.1.5.2"/></svg>
-      Написать в Телеграм
+<header class="top">
+  <div class="wrap">
+    <a class="brandmark" href="#top" aria-label="Lady on Travel, Виктория, турагент">
+      <img src="assets/logo.svg" alt="" width="42" height="42">
+      <span><b>Lady on Travel</b><span>Виктория, турагент</span></span>
     </a>
-    <p class="btn-note">Отвечаю сама, без ботов и менеджеров</p>
-    <div class="hero-badges">
-      <span class="badge">🌴 Мальдивы</span>
-      <span class="badge">🏖️ Турция</span>
-      <span class="badge">🐠 Египет</span>
-      <span class="badge">🐪 Марокко</span>
-      <span class="badge">☀️ Вьетнам</span>
-      <span class="badge">🏙️ ОАЭ</span>
-      <span class="badge">🌺 Малайзия</span>
-      <span class="badge">🏮 Китай и Бали</span>
-      <span class="badge">и ещё много стран</span>
-    </div>
-   </div>
+    <a class="top-phone" href="tel:+79119433981" aria-label="Позвонить Виктории">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+      <span>+7 911 943-39-81</span>
+    </a>
   </div>
 </header>
 
-<main>
+<main id="top">
 
-<!-- ================== 2. С ЧЕМ ПРИХОДЯТ ================== -->
-<section>
+<!-- ============ 1. ПЕРВЫЙ ЭКРАН ============ -->
+<section class="hero sea">
+  <canvas class="sea-canvas" id="sea-canvas" aria-hidden="true"></canvas>
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Найду вам отпуск, после которого не хочется домой</h1>
+      <p class="sub">Я Виктория, турагент из Петербурга. Расскажите, как хотите отдохнуть, а я подберу тур, отель и перелёт. Вы просто собираете чемодан.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary tg-link" href="https://t.me/VitoriaRuleva" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.8 15.3 9.6 19c.4 0 .6-.2.8-.4l2-1.9 4.1 3c.8.4 1.3.2 1.5-.7l2.7-12.7c.3-1.1-.4-1.6-1.1-1.3L3.7 10.8c-1.1.4-1.1 1-.2 1.3l4.1 1.3 9.5-6c.4-.3.9-.1.5.2"/></svg>
+          Написать в Телеграм
+        </a>
+        <a class="btn btn-outline light" href="tel:+79119433981">Позвонить</a>
+      </div>
+      <p class="hero-note">Отвечаю сама, без ботов и менеджеров.</p>
+    </div>
+
+    <!-- Посадочный талон: выбранное направление попадает в сообщение Виктории -->
+    <div class="pass" id="pass">
+      <div class="pass-head">
+        <img src="assets/logo.svg" alt="" width="28" height="28">
+        <b>Lady on Travel</b>
+        <span>Посадочный талон</span>
+      </div>
+      <div class="pass-body">
+        <div class="route">
+          <div class="leg">
+            <span class="leg-label">Откуда</span>
+            <span class="leg-code">LED</span>
+            <span class="leg-name">Санкт-Петербург</span>
+          </div>
+          <div class="route-path" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="currentColor"><path d="M14 33.5 49 16c1.3-.6 2.5.8 1.8 2L38 50c-.5 1.2-2.2 1.2-2.7 0l-4.6-11.2L19.5 34c-1.3-.5-1.3-2.1-.1-2.6z"/></svg>
+          </div>
+          <div class="leg to">
+            <span class="leg-label">Куда</span>
+            <span class="leg-code" id="dest-code">MLE</span>
+            <span class="leg-name" id="dest-name">Мальдивы</span>
+          </div>
+        </div>
+        <p class="dest-line" id="dest-line" aria-live="polite">Виллы над водой, лучшие острова, трансфер на гидросамолёте.</p>
+        <div class="chips" role="group" aria-label="Выберите направление">
+          <button class="chip" type="button" data-dest="mle" aria-pressed="true">Мальдивы</button>
+          <button class="chip" type="button" data-dest="ayt" aria-pressed="false">Турция</button>
+          <button class="chip" type="button" data-dest="hrg" aria-pressed="false">Египет</button>
+          <button class="chip" type="button" data-dest="rak" aria-pressed="false">Марокко</button>
+          <button class="chip" type="button" data-dest="any" aria-pressed="false">Другая страна</button>
+        </div>
+        <div class="fields">
+          <div class="field"><span>Когда</span><b>ваши даты</b></div>
+          <div class="field"><span>С кем</span><b>вы и ваши близкие</b></div>
+          <div class="field"><span>Бюджет</span><b>сколько готовы потратить</b></div>
+        </div>
+      </div>
+      <div class="stub">
+        <a class="btn btn-primary" id="pass-cta" href="https://t.me/VitoriaRuleva" target="_blank" rel="noopener">Написать про Мальдивы</a>
+      </div>
+    </div>
+  </div>
+  <button class="sea-btn" id="sea-btn" type="button">Остановить анимацию фона</button>
+</section>
+
+<!-- ============ 2. С ЧЕМ ПРИХОДЯТ ============ -->
+<section class="section" style="padding-top:0">
   <div class="wrap">
-    <span class="kicker">С чем ко мне приходят</span>
     <h2>Узнаёте себя?</h2>
     <p class="lead">Мне пишут очень разные люди, но начинается всё обычно с одной из этих фраз.</p>
-    <div class="cards3">
-      <article class="card">
-        <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&q=70" alt="Пальмы и белый песок на берегу моря" loading="lazy">
-        <div class="card-body">
-          <p class="quote">«Хочу на море, но не знаю куда»</p>
+    <div class="situations">
+      <article class="situation">
+        <div>
+          <q>«Хочу на море, но не знаю куда»</q>
           <p>Вы открыли сайты туроператоров, а там тысячи отелей и у всех отличные отзывы. Я отсею лишнее и оставлю пару вариантов, которые правда подходят вам.</p>
         </div>
+        <div class="situation-photo"><img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=700&q=70" alt="Пальмы и белый песок на берегу моря" width="300" height="400" loading="lazy"></div>
       </article>
-      <article class="card">
-        <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&q=70" alt="Бирюзовая бухта с лодками" loading="lazy">
-        <div class="card-body">
-          <p class="quote">«Едем с детьми, нужно, чтобы всем было хорошо»</p>
+      <article class="situation">
+        <div>
+          <q>«Едем с детьми, нужно, чтобы всем было хорошо»</q>
           <p>Пологий заход в море, детское меню, анимация, короткий трансфер. Я знаю, где это есть на самом деле, а не только на фото в буклете.</p>
         </div>
+        <div class="situation-photo"><img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=700&q=70" alt="Бирюзовая бухта с лодками" width="300" height="400" loading="lazy"></div>
       </article>
-      <article class="card">
-        <img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800&q=70" alt="Виллы над водой на Мальдивах" loading="lazy">
-        <div class="card-body">
-          <p class="quote">«Хочу особенный отдых, раз в жизни»</p>
+      <article class="situation">
+        <div>
+          <q>«Хочу особенный отдых, раз в жизни»</q>
           <p>Медовый месяц, юбилей, вилла над океаном на Мальдивах. Продумаю всё до мелочей, чтобы вы ничего не проверяли и ни о чём не волновались.</p>
         </div>
+        <div class="situation-photo"><img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=700&q=70" alt="Виллы над водой на Мальдивах" width="300" height="400" loading="lazy"></div>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ================== 3. УСЛУГИ И ЦЕНЫ ================== -->
-<section class="services">
+<!-- ============ 3. НАПРАВЛЕНИЯ (табло) ============
+     КОГДА БУДУТ РЕАЛЬНЫЕ ЦЕНЫ: в каждой строке замените текст в блоке class="cost"
+     на, например, "от 00 000 ₽ на двоих". Выдумывать цены нельзя.
+-->
+<section class="section dark" id="directions">
   <div class="wrap">
-    <span class="kicker">Услуги и цены</span>
-    <h2>Куда и сколько стоит</h2>
-    <p class="lead">Цены ориентировочные, за тур на двоих. Точную сумму назову, когда узнаю ваши даты и пожелания.</p>
-    <div class="price-grid">
-      <div class="price">
-        <h3>Пляжный отдых в Турции</h3>
-        <p>«Всё включено», тёплое море, удобный перелёт из Петербурга. Отлично подходит и семьям, и компаниям.</p>
-        <div class="cost">от <span class="fill">[цена]</span> ₽</div>
-      </div>
-      <div class="price sun">
-        <h3>Египет: море и кораллы</h3>
-        <p>Красное море круглый год, снорклинг прямо у отеля, экскурсии к пирамидам по желанию.</p>
-        <div class="cost">от <span class="fill">[цена]</span> ₽</div>
-      </div>
-      <div class="price hot">
-        <h3>Мальдивы и премиум-отдых</h3>
-        <p>Виллы над водой, лучшие острова, трансфер на гидросамолёте. Отдых, который запоминается на всю жизнь.</p>
-        <div class="cost">от <span class="fill">[цена]</span> ₽</div>
-      </div>
-      <div class="price">
-        <h3>Марокко и другие страны</h3>
-        <p>Восточные базары, океан, пустыня. И вообще любая страна, куда вам хочется: просто спросите.</p>
-        <div class="cost">от <span class="fill">[цена]</span> ₽</div>
-      </div>
-    </div>
-    <p class="services-note">А ещё помогу со страховкой, трансфером и документами, чтобы в поездке не было неприятных сюрпризов.</p>
+    <h2>Куда можно поехать</h2>
+    <p class="lead">Стоимость зависит от дат, отеля и числа туристов. Расскажите пожелания и бюджет, а я посчитаю несколько вариантов.</p>
+    <ul class="board">
+      <li>
+        <span class="code">MLE</span>
+        <span class="name">Мальдивы</span>
+        <span class="desc">Виллы над водой, лучшие острова, трансфер на гидросамолёте. Отдых, который запоминается на всю жизнь.</span>
+        <span class="cost">Посчитаю под ваш бюджет</span>
+        <span class="act"><a class="btn btn-outline light btn-small tg-link" data-msg="Хочу поехать на Мальдивы" href="https://t.me/VitoriaRuleva" target="_blank" rel="noopener" aria-label="Написать Виктории про Мальдивы">Написать</a></span>
+      </li>
+      <li>
+        <span class="code">AYT</span>
+        <span class="name">Турция</span>
+        <span class="desc">«Всё включено», тёплое море, удобный перелёт из Петербурга. Подходит и семьям, и компаниям.</span>
+        <span class="cost">Посчитаю под ваш бюджет</span>
+        <span class="act"><a class="btn btn-outline light btn-small tg-link" data-msg="Хочу поехать в Турцию" href="https://t.me/VitoriaRuleva" target="_blank" rel="noopener" aria-label="Написать Виктории про Турцию">Написать</a></span>
+      </li>
+      <li>
+        <span class="code">HRG</span>
+        <span class="name">Египет</span>
+        <span class="desc">Красное море круглый год, снорклинг прямо у отеля, экскурсии к пирамидам по желанию.</span>
+        <span class="cost">Посчитаю под ваш бюджет</span>
+        <span class="act"><a class="btn btn-outline light btn-small tg-link" data-msg="Хочу поехать в Египет" href="https://t.me/VitoriaRuleva" target="_blank" rel="noopener" aria-label="Написать Виктории про Египет">Написать</a></span>
+      </li>
+      <li>
+        <span class="code">RAK</span>
+        <span class="name">Марокко</span>
+        <span class="desc">Восточные базары, океан, пустыня.</span>
+        <span class="cost">Посчитаю под ваш бюджет</span>
+        <span class="act"><a class="btn btn-outline light btn-small tg-link" data-msg="Хочу поехать в Марокко" href="https://t.me/VitoriaRuleva" target="_blank" rel="noopener" aria-label="Написать Виктории про Марокко">Написать</a></span>
+      </li>
+      <li>
+        <span class="code">ANY</span>
+        <span class="name">Другая страна</span>
+        <span class="desc">Любая страна, куда вам хочется: просто спросите.</span>
+        <span class="cost">Посчитаю под ваш бюджет</span>
+        <span class="act"><a class="btn btn-outline light btn-small tg-link" data-msg="Хочу подобрать тур" href="https://t.me/VitoriaRuleva" target="_blank" rel="noopener" aria-label="Написать Виктории про другую страну">Написать</a></span>
+      </li>
+    </ul>
+    <p class="board-note">А ещё помогу со страховкой, трансфером и документами, чтобы в поездке не было неприятных сюрпризов.</p>
   </div>
 </section>
 
-<!-- ================== 3а. ОБЗОРЫ ОТЕЛЕЙ (видео) ================== -->
-<section class="reels-section">
+<!-- ============ 4. КАК ВСЁ ПРОХОДИТ ============ -->
+<section class="section">
   <div class="wrap">
-    <span class="kicker">Обзоры отелей</span>
-    <h2>Смотрите, куда можно поехать</h2>
-    <p class="lead">Короткие видео об отелях и турах. Нажмите на любое, чтобы посмотреть со звуком.</p>
+    <h2>Три шага до моря</h2>
+    <ol class="steps">
+      <li class="step">
+        <h3>Вы пишете мне</h3>
+        <p>В Телеграм или по телефону. Расскажите, когда хотите поехать, с кем и какой бюджет. Можно в двух словах, остальное я спрошу сама.</p>
+      </li>
+      <li class="step">
+        <h3>Я подбираю варианты</h3>
+        <p>Присылаю несколько подходящих туров и честно рассказываю про каждый: что там хорошо, а что так себе.</p>
+      </li>
+      <li class="step">
+        <h3>Вы едете отдыхать</h3>
+        <p>Оформляю тур, отправляю документы и остаюсь на связи всю поездку. Если что-то пойдёт не так, я рядом.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 5. ОБЕЩАНИЯ ============ -->
+<section class="promises">
+  <div class="wrap promise-grid">
+    <div class="promise">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
+      <b>Отвечаю сама</b>
+      <p>Без ботов и менеджеров. Вы всегда общаетесь со мной.</p>
+    </div>
+    <div class="promise">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      <b>На связи 24/7 в поездке</b>
+      <p>Что бы ни случилось в отпуске, пишите в любое время.</p>
+    </div>
+    <div class="promise">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.2"/></svg>
+      <b>Цены как у туроператора</b>
+      <p>Никаких наценок за мою помощь. Тур стоит столько же, сколько на сайте туроператора.</p>
+    </div>
+    <div class="promise">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/></svg>
+      <b>Страховка, трансфер, документы</b>
+      <p>Помогу со всем, чтобы в поездке не было неприятных сюрпризов.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. ОБО МНЕ ============ -->
+<section class="section about">
+  <div class="wrap about-grid">
+    <div class="situation-photo about-photo"><img src="assets/victoria.jpg" alt="Виктория, турагент Lady on Travel" width="720" height="900" loading="lazy"></div>
+    <div>
+      <h2>Привет, я Виктория</h2>
+      <p class="role">Турагент и руководитель отдела продаж в агентстве Lady on Travel</p>
+      <!-- УТОЧНИТЬ у Виктории: "Больше пяти лет" и "150+ туристов" (24/7 подтверждено) -->
+      <p>Больше пяти лет я отправляю людей в отпуск. Живу в Петербурге, работаю в агентстве Lady on Travel и руковожу отделом продаж.</p>
+      <p>Мне нравится, когда человек пишет «не знаю, чего хочу», а через неделю присылает фото с бирюзовым морем и подписью «вы волшебница». Ради этого я и работаю.</p>
+      <p>Я не продаю первый попавшийся тур. Сначала узнаю, как вы любите отдыхать, а потом ищу то, что подойдёт именно вам. Неважно, едете вы в Турцию с детьми или на Мальдивы в свадебное путешествие.</p>
+      <ul class="checks">
+        <li>Больше пяти лет в туризме</li>
+        <li>Более 150 довольных туристов</li>
+        <li>На связи 24/7 во время вашей поездки</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. ОТЕЛИ: видеообзоры (ролики сняла Виктория) ============
+     Ролики лежат в assets/video: имя.mp4 + обложка имя.jpg. Нажатие запускает видео со звуком. -->
+<section class="section teal">
+  <div class="wrap hotels">
+    <div>
+      <h2>Отели, в которые я отправляю туристов</h2>
+      <p>Короткие видео отелей, в которых я была сама. Нажмите на любое, чтобы посмотреть со звуком. Ещё больше обзоров в моём Телеграме.</p>
+    </div>
+    <div>
+      <a class="btn btn-light" href="https://t.me/VitoriaRuleva" target="_blank" rel="noopener">Смотреть отели в Телеграме</a>
+    </div>
   </div>
   <div class="reels" id="reels">
     <figure class="reel"><video src="assets/video/maldives-joy-island.mp4" poster="assets/video/maldives-joy-island.jpg" preload="none" playsinline></video><figcaption><span class="reel-country">Мальдивы</span>Joy Island 5*</figcaption></figure>
@@ -129,117 +564,51 @@
     <figure class="reel"><video src="assets/video/shanghai-bali.mp4" poster="assets/video/shanghai-bali.jpg" preload="none" playsinline></video><figcaption><span class="reel-country">Комби-тур</span>Шанхай и Бали</figcaption></figure>
     <figure class="reel"><video src="assets/video/vietnam-emerald.mp4" poster="assets/video/vietnam-emerald.jpg" preload="none" playsinline></video><figcaption><span class="reel-country">Вьетнам</span>Emerald Bay Нячанг 4*</figcaption></figure>
   </div>
-  <div class="wrap reels-cta">
-    <a class="btn tg-btn" href="#" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.8 15.3 9.6 19c.4 0 .6-.2.8-.4l2-1.9 4.1 3c.8.4 1.3.2 1.5-.7l2.7-12.7c.3-1.1-.4-1.6-1.1-1.3L3.7 10.8c-1.1.4-1.1 1-.2 1.3l4.1 1.3 9.5-6c.4-.3.9-.1.5.2"/></svg>
-      Хочу в такой отель
-    </a>
-  </div>
 </section>
 
-<!-- ================== 4. КАК ПРОХОДИТ ПОДБОР ================== -->
-<section>
+<!-- ============ 7а. ОТЗЫВЫ (3D-лента) ============
+     Имена и тексты отзывов НЕ здесь, а в скрипте внизу страницы: блок "ОТЗЫВЫ ТУРИСТОВ", список REVIEWS.
+-->
+<section class="section" id="reviews">
   <div class="wrap">
-    <span class="kicker">Как всё проходит</span>
-    <h2>Три шага до моря</h2>
-    <div class="steps">
-      <div class="step">
-        <h3>Вы пишете мне</h3>
-        <p>В Телеграм или в Max. Расскажите, когда хотите поехать, с кем и какой бюджет. Можно в двух словах, остальное я спрошу сама.</p>
-      </div>
-      <div class="step">
-        <h3>Я подбираю варианты</h3>
-        <p>Присылаю несколько подходящих туров и честно рассказываю про каждый: что там хорошо, а что так себе.</p>
-      </div>
-      <div class="step">
-        <h3>Вы едете отдыхать</h3>
-        <p>Оформляю тур, отправляю документы и остаюсь на связи всю поездку. Если что-то пойдёт не так, я рядом.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================== 4а. ОБЕЩАНИЯ ================== -->
-<section class="promises">
-  <div class="wrap">
-    <div class="promise-grid">
-      <div class="promise">
-        <span class="ico">💬</span>
-        <b>Отвечаю сама</b>
-        <p>Без ботов и менеджеров. Вы всегда общаетесь со мной.</p>
-      </div>
-      <div class="promise">
-        <span class="ico">🕐</span>
-        <b>На связи 24/7 в поездке</b>
-        <p>Что бы ни случилось в отпуске, пишите в любое время.</p>
-      </div>
-      <div class="promise">
-        <span class="ico">💰</span>
-        <b>Цены как у туроператора</b>
-        <p>Никаких наценок за мою помощь. Тур стоит столько же, сколько на сайте туроператора.</p>
-      </div>
-      <div class="promise">
-        <span class="ico">📄</span>
-        <b>Страховка, трансфер, документы</b>
-        <p>Помогу со всем, чтобы в поездке не было неприятных сюрпризов.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================== 5. ОБО МНЕ ================== -->
-<section class="about">
-  <div class="wrap about-grid">
-    <img class="about-photo" src="assets/victoria.jpg" alt="Виктория, турагент" width="720" height="900" loading="lazy">
-    <div>
-      <span class="kicker">Обо мне</span>
-      <h2>Привет, я Виктория</h2>
-      <p>Больше пяти лет я отправляю людей в отпуск. Живу в Петербурге, работаю в агентстве Lady on Travel.</p>
-      <p>Мне нравится, когда человек пишет «не знаю, чего хочу», а через неделю присылает фото с бирюзовым морем и подписью «вы волшебница». Ради этого я и работаю.</p>
-      <p>Я не продаю первый попавшийся тур. Сначала узнаю, как вы любите отдыхать, а потом ищу то, что подойдёт именно вам. Неважно, едете вы в Турцию с детьми или на Мальдивы в свадебное путешествие.</p>
-      <div class="facts">
-        <div class="fact"><b>5+</b><span>лет в туризме</span></div>
-        <div class="fact"><b>150+</b><span>довольных туристов</span></div>
-        <div class="fact"><b>24/7</b><span>на связи в поездке</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================== 6. ОТЗЫВЫ (заполнить позже) ================== -->
-<section>
-  <div class="wrap">
-    <span class="kicker">Отзывы</span>
     <h2>Что говорят туристы</h2>
-    <div class="reviews-grid">
-      <div class="review"><p>[Здесь будет текст отзыва]</p><p class="who">[Имя, куда ездили]</p></div>
-      <div class="review"><p>[Здесь будет текст отзыва]</p><p class="who">[Имя, куда ездили]</p></div>
-      <div class="review"><p>[Здесь будет текст отзыва]</p><p class="who">[Имя, куда ездили]</p></div>
+    <p class="lead">Отзывы людей, которым я подбирала отдых.</p>
+    <p class="sample-note" id="sample-note" hidden>Образец оформления: имена и тексты примерные, настоящие отзывы появятся позже.</p>
+    <div class="reviews-stage" id="reviews-stage">
+      <div class="reviews-tilt" id="reviews-tilt">
+        <div class="fade fade-top"></div>
+        <div class="fade fade-bottom"></div>
+        <div class="fade fade-left"></div>
+        <div class="fade fade-right"></div>
+      </div>
     </div>
+    <button class="btn btn-outline btn-small motion-btn" id="motion-btn" type="button">Остановить анимацию</button>
   </div>
 </section>
 
-<!-- ================== 7. ВОПРОСЫ И ОТВЕТЫ ================== -->
-<section class="faq" id="faq">
-  <div class="wrap">
-    <span class="kicker">Вопросы и ответы</span>
-    <h2>Частые вопросы</h2>
-    <div class="faq-list">
+<!-- ============ 8. ВОПРОСЫ И ОТВЕТЫ ============ -->
+<section class="section faq" id="faq">
+  <div class="wrap faq-grid">
+    <div>
+      <h2>Частые вопросы</h2>
+      <p class="lead">Если вашего вопроса здесь нет, просто напишите мне.</p>
+    </div>
+    <div>
       <details>
         <summary>Через вас дороже, чем купить тур самому?</summary>
         <p>Нет. Туры я беру у тех же туроператоров, что и на их сайтах, и по тем же ценам. Разница в том, что я заранее знаю, какой отель хороший, а какой только красиво сфотографирован.</p>
       </details>
       <details>
         <summary>Я не в Петербурге. Вы сможете мне помочь?</summary>
-        <p>Конечно. Всё общение идёт в мессенджере, документы я присылаю онлайн. Ехать в офис не придётся.</p>
+        <p>Конечно. Всё общение идёт в мессенджере или по телефону, документы я присылаю онлайн. Ехать в офис не придётся.</p>
       </details>
       <details>
         <summary>За сколько времени лучше бронировать?</summary>
-        <p>Чем раньше, тем больше выбор и ниже цены. На лето и новогодние праздники лучше писать за 2–4 месяца. Но горящие туры я тоже подбираю, иногда можно улететь уже через пару дней.</p>
+        <p>Чем раньше, тем больше выбор и ниже цены. На лето и новогодние праздники лучше писать за 2-4 месяца. Но горящие туры я тоже подбираю, иногда можно улететь уже через пару дней.</p>
       </details>
       <details>
         <summary>Что будет, если в поездке что-то пойдёт не так?</summary>
-        <p>Пишите мне. Я остаюсь на связи всю поездку и помогаю решать вопросы с отелем, трансфером или туроператором.</p>
+        <p>Пишите или звоните мне. Я остаюсь на связи всю поездку и помогаю решать вопросы с отелем, трансфером или туроператором.</p>
       </details>
       <details>
         <summary>У меня небольшой бюджет. Есть смысл писать?</summary>
@@ -249,16 +618,21 @@
   </div>
 </section>
 
-<!-- ================== 8. ФИНАЛ ================== -->
-<section class="final">
-  <div class="wrap">
-    <img class="final-avatar" src="assets/victoria-2.jpg" alt="Виктория" width="400" height="400" loading="lazy">
-    <h2>Море уже ждёт</h2>
-    <p>Напишите мне, расскажите, о каком отдыхе мечтаете, и уже сегодня я пришлю первые варианты.</p>
-    <a class="btn tg-btn" href="#" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.8 15.3 9.6 19c.4 0 .6-.2.8-.4l2-1.9 4.1 3c.8.4 1.3.2 1.5-.7l2.7-12.7c.3-1.1-.4-1.6-1.1-1.3L3.7 10.8c-1.1.4-1.1 1-.2 1.3l4.1 1.3 9.5-6c.4-.3.9-.1.5.2"/></svg>
-      Написать в Телеграм
-    </a>
+<!-- ============ 9. ФИНАЛ ============ -->
+<section class="section dark final">
+  <div class="wrap final-grid">
+    <div>
+      <img class="final-avatar" src="assets/victoria-2.jpg" alt="Виктория" width="400" height="400" loading="lazy">
+      <h2>Море уже ждёт</h2>
+      <p>Напишите или позвоните мне, расскажите, о каком отдыхе мечтаете, и уже сегодня я пришлю первые варианты.</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-primary tg-link" href="https://t.me/VitoriaRuleva" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.8 15.3 9.6 19c.4 0 .6-.2.8-.4l2-1.9 4.1 3c.8.4 1.3.2 1.5-.7l2.7-12.7c.3-1.1-.4-1.6-1.1-1.3L3.7 10.8c-1.1.4-1.1 1-.2 1.3l4.1 1.3 9.5-6c.4-.3.9-.1.5.2"/></svg>
+        Написать в Телеграм
+      </a>
+      <a class="btn btn-outline light" href="tel:+79119433981">Позвонить</a>
+    </div>
   </div>
 </section>
 
@@ -267,61 +641,273 @@
 <footer>
   <div class="wrap">
     <div>
-      <b>Виктория</b>, турагент Lady on Travel<br>
+      <b>Виктория</b>, турагент и руководитель отдела продаж<br>
+      агентство Lady on Travel<br>
       Санкт-Петербург
     </div>
     <div class="contacts">
-      <span>Телеграм: <a class="tg-btn" href="#" target="_blank" rel="noopener" id="tg-text">@[ник]</a></span>
-      <span>Max: <a id="max-link" href="#" target="_blank" rel="noopener">[ссылка на Max]</a></span>
-      <span>Телефон: <a id="phone-link" href="#">[номер телефона]</a></span>
+      <span>Телеграм: <a href="https://t.me/VitoriaRuleva" target="_blank" rel="noopener">@VitoriaRuleva</a></span>
+      <span>Телефон: <a href="tel:+79119433981">+7 911 943-39-81</a></span>
+      <span id="max-row" hidden>Max: <a id="max-link" href="#" target="_blank" rel="noopener">написать в Max</a></span>
     </div>
   </div>
+  <!-- Реквизиты (ИП или ООО, ИНН, сведения о туроператорах) добавить сюда, когда Виктория их предоставит. -->
 </footer>
 
 <script>
-  /* ====== ЗАПОЛНИТЕ ЗДЕСЬ ====== */
-  const TG_NICK   = "";   // ник в Телеграме без @, например: "victoria_travel"
-  const MAX_LINK  = "";   // ссылка на Max, например: "https://max.ru/..."
-  const PHONE     = "";   // телефон, например: "+7 900 000-00-00"
-  const TG_TEXT   = "Здравствуйте, хочу записаться";
-  /* ============================= */
+  const TG_NICK  = "VitoriaRuleva";
+  const MAX_LINK = "";   // когда будет ссылка на Max, вставьте сюда, например: "https://max.ru/..."
+  const GREETING = "Здравствуйте, Виктория! ";
 
-  const tgUrl = "https://t.me/" + TG_NICK + "?text=" + encodeURIComponent(TG_TEXT);
-  document.querySelectorAll(".tg-btn").forEach(a => {
-    if (TG_NICK) {
-      a.href = tgUrl;
-    } else {
-      a.addEventListener("click", e => {
-        e.preventDefault();
-        alert("Ник в Телеграме ещё не указан. Впишите его в TG_NICK в конце файла.");
-      });
-    }
-  });
-  // Обзоры: нажали — играет со звуком, остальные ставятся на паузу
-  const reels = document.querySelectorAll(".reel video");
-  reels.forEach(v => {
-    v.addEventListener("click", () => {
-      if (v.paused) {
-        reels.forEach(o => { if (o !== v) o.pause(); });
-        v.muted = false; v.play();
-      } else {
-        v.pause();
-      }
-    });
-    v.addEventListener("play",  () => v.parentElement.classList.add("playing"));
-    v.addEventListener("pause", () => v.parentElement.classList.remove("playing"));
-    v.addEventListener("ended", () => v.parentElement.classList.remove("playing"));
+  const tgUrl = text => "https://t.me/" + TG_NICK + "?text=" + encodeURIComponent(GREETING + text);
+
+  const DEST = {
+    mle: { code: "MLE", name: "Мальдивы",      about: "про Мальдивы",  msg: "Хочу поехать на Мальдивы", line: "Виллы над водой, лучшие острова, трансфер на гидросамолёте." },
+    ayt: { code: "AYT", name: "Турция",        about: "про Турцию",    msg: "Хочу поехать в Турцию",    line: "«Всё включено», тёплое море, удобный перелёт из Петербурга." },
+    hrg: { code: "HRG", name: "Египет",        about: "про Египет",    msg: "Хочу поехать в Египет",    line: "Красное море круглый год, снорклинг у отеля, экскурсии к пирамидам." },
+    rak: { code: "RAK", name: "Марокко",       about: "про Марокко",   msg: "Хочу поехать в Марокко",   line: "Восточные базары, океан и пустыня." },
+    any: { code: "ANY", name: "Другая страна", about: "про поездку",   msg: "Хочу подобрать тур",       line: "Любая страна, куда вам хочется: просто спросите." }
+  };
+
+  document.querySelectorAll(".tg-link").forEach(a => {
+    a.href = tgUrl(a.dataset.msg || "Хочу подобрать тур");
   });
 
-  if (TG_NICK) document.getElementById("tg-text").textContent = "@" + TG_NICK;
+  const codeEl = document.getElementById("dest-code");
+  const nameEl = document.getElementById("dest-name");
+  const lineEl = document.getElementById("dest-line");
+  const ctaEl  = document.getElementById("pass-cta");
+  const chips  = document.querySelectorAll(".chip");
+
+  function choose(key) {
+    const d = DEST[key];
+    codeEl.textContent = d.code;
+    nameEl.textContent = d.name;
+    lineEl.textContent = d.line;
+    ctaEl.textContent  = "Написать " + d.about;
+    ctaEl.href = tgUrl(d.msg);
+    chips.forEach(c => c.setAttribute("aria-pressed", String(c.dataset.dest === key)));
+    codeEl.classList.remove("flip");
+    void codeEl.offsetWidth;
+    codeEl.classList.add("flip");
+  }
+  chips.forEach(c => c.addEventListener("click", () => choose(c.dataset.dest)));
+  ctaEl.href = tgUrl(DEST.mle.msg);
+
   if (MAX_LINK) {
-    const m = document.getElementById("max-link");
-    m.href = MAX_LINK; m.textContent = "написать в Max";
+    document.getElementById("max-link").href = MAX_LINK;
+    document.getElementById("max-row").hidden = false;
   }
-  if (PHONE) {
-    const p = document.getElementById("phone-link");
-    p.href = "tel:" + PHONE.replace(/[^\d+]/g, ""); p.textContent = PHONE;
-  }
+
+  /* Общая пауза анимаций (лента отзывов и фон). Решение владельца сайта: движение стартует у всех сразу,
+     а кнопки "Остановить анимацию" оставлены для тех, кому оно мешает. Системную настройку "уменьшить движение" не учитываем. */
+  let motionPaused = false;
+  const motionListeners = [];
+  const onMotion = fn => { motionListeners.push(fn); fn(motionPaused); };
+  const setMotion = p => { motionPaused = p; motionListeners.forEach(fn => fn(p)); };
+
+  /* ================= ОТЗЫВЫ ТУРИСТОВ =================
+     Сюда вносятся настоящие отзывы. Каждый отзыв - одна строка в списке REVIEWS:
+       name - имя (например "Анна К.")
+       trip - куда ездили
+       city - город туриста
+       body - текст отзыва
+       img  - необязательно: ссылка на фото. Без фото показывается первая буква имени.
+     Когда впишете настоящие отзывы, поставьте SAMPLE_REVIEWS = false, и пометка "Образец оформления" исчезнет.
+     Сейчас в списке ПРИМЕРНЫЕ отзывы для показа дизайна. Публиковать сайт с ними нельзя. */
+  const SAMPLE_REVIEWS = true;
+  const REVIEWS = [
+    { name: "Анна К.",     trip: "Мальдивы", city: "Москва",          body: "Подобрали остров и виллу под наш бюджет. Всё прошло без сюрпризов." },
+    { name: "Игорь С.",    trip: "Турция",   city: "Череповец",       body: "Ехали всей семьёй. Отель выбрали с пологим заходом в море, сын был в восторге." },
+    { name: "Елена В.",    trip: "Египет",   city: "Воронеж",         body: "Поехали с подругой. Перелёт, трансфер и страховку оформили за пару дней." },
+    { name: "Марина Д.",   trip: "Марокко",  city: "Санкт-Петербург", body: "Хотела необычную поездку, и получилось именно так: рынки, океан и пустыня." },
+    { name: "Дмитрий Л.",  trip: "Мальдивы", city: "Москва",          body: "Свадебное путешествие. На сообщения в Телеграме отвечали быстро." },
+    { name: "Галина П.",   trip: "Турция",   city: "Саратов",         body: "Впервые поехала одна. В аэропорту встретили, и я ни разу не растерялась." },
+    { name: "Наталья Р.",  trip: "Египет",   city: "Казань",          body: "Подсказали, где лучше брать экскурсии, и не пришлось переплачивать." },
+    { name: "Олег Т.",     trip: "Турция",   city: "Тверь",           body: "Нашёлся горящий тур, улетели через три дня." },
+    { name: "Светлана М.", trip: "Марокко",  city: "Псков",           body: "Виктория была на связи и во время поездки, когда не нашёлся чемодан." }
+  ];
+
+  (function buildReviews() {
+    const tilt = document.getElementById("reviews-tilt");
+    if (!tilt) return;
+    document.getElementById("sample-note").hidden = !SAMPLE_REVIEWS;
+
+    const el = (tag, cls, text) => {
+      const n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text !== undefined) n.textContent = text;
+      return n;
+    };
+
+    function card(r, index) {
+      const fig = el("figure", "rcard");
+      const cap = el("figcaption");
+      const av = el("span", "ravatar c" + (index % 3));
+      if (r.img) {
+        const im = el("img"); im.src = r.img; im.alt = ""; im.loading = "lazy"; av.appendChild(im);
+      } else {
+        av.textContent = r.name.charAt(0);
+      }
+      const who = el("div");
+      const nm = el("div", "rname", r.name + " ");
+      nm.appendChild(el("span", "", r.trip));
+      who.appendChild(nm);
+      who.appendChild(el("p", "rcity", r.city));
+      cap.appendChild(av); cap.appendChild(who);
+      fig.appendChild(cap);
+      fig.appendChild(el("blockquote", "", r.body));
+      return fig;
+    }
+
+    function column(reverse, hidden) {
+      const m = el("div", "marquee" + (reverse ? " reverse" : ""));
+      if (hidden) {
+        m.setAttribute("aria-hidden", "true");
+      } else {
+        m.setAttribute("role", "marquee");
+        m.setAttribute("aria-label", "Отзывы туристов");
+        m.setAttribute("aria-live", "off");
+        m.tabIndex = 0;
+      }
+      for (let i = 0; i < 3; i++) {
+        const track = el("div", "marquee-track");
+        if (hidden || i > 0) track.setAttribute("aria-hidden", "true");
+        REVIEWS.forEach((r, idx) => track.appendChild(card(r, idx)));
+        m.appendChild(track);
+      }
+      return m;
+    }
+
+    const first = tilt.firstChild;
+    [[false, false], [true, true], [false, true], [true, true]].forEach(([reverse, hidden]) => {
+      tilt.insertBefore(column(reverse, hidden), first);
+    });
+
+    const stage = document.getElementById("reviews-stage");
+    const btn = document.getElementById("motion-btn");
+    btn.addEventListener("click", () => setMotion(!motionPaused));
+    onMotion(p => {
+      stage.classList.toggle("paused", p);
+      btn.textContent = p ? "Запустить анимацию" : "Остановить анимацию";
+    });
+  })();
+
+  /* ============ ФОН-ШЕЙДЕР "ТЕЧЕНИЯ" ============
+     Собственный WebGL-шейдер (шум с искажением координат). Палитра: #031C26, #1B6CA8, #5AD2F4, #EAF9FF.
+     Если WebGL недоступен, остаётся обычный градиент тех же цветов из CSS. */
+  (function seaShader() {
+    const canvas = document.getElementById("sea-canvas");
+    const sbtn = document.getElementById("sea-btn");
+    if (!canvas) return;
+    const fail = () => { canvas.remove(); sbtn.hidden = true; };
+    const gl = canvas.getContext("webgl", { antialias: false, alpha: false, powerPreference: "low-power" });
+    if (!gl) { fail(); return; }
+
+    const VS = "attribute vec2 a; void main() { gl_Position = vec4(a, 0.0, 1.0); }";
+    const FS = `
+      #ifdef GL_FRAGMENT_PRECISION_HIGH
+      precision highp float;
+      #else
+      precision mediump float;
+      #endif
+      uniform vec2 u_res;
+      uniform float u_time;
+      float hash(vec2 p) { p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
+      float noise(vec2 p) {
+        vec2 i = floor(p), f = fract(p);
+        f = f * f * (3.0 - 2.0 * f);
+        return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
+                   mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
+      }
+      float fbm(vec2 p) {
+        float v = 0.0, a = 0.5;
+        mat2 m = mat2(1.6, 1.2, -1.2, 1.6);
+        for (int i = 0; i < 5; i++) { v += a * noise(p); p = m * p; a *= 0.5; }
+        return v;
+      }
+      void main() {
+        vec2 p = (gl_FragCoord.xy - 0.5 * u_res) / min(u_res.x, u_res.y) * 2.0;
+        float t = u_time * 0.08;
+        vec2 q = vec2(fbm(p + vec2(0.0, t)), fbm(p + vec2(5.2, 1.3) - t));
+        vec2 r = vec2(fbm(p + 3.0 * q + vec2(1.7, 9.2) + 0.9 * t), fbm(p + 3.0 * q + vec2(8.3, 2.8) - 0.7 * t));
+        float f = fbm(p + 3.0 * r);
+        f = clamp(f * 1.35 - 0.12 + 0.25 * length(q), 0.0, 1.0);
+        vec3 c0 = vec3(0.012, 0.110, 0.149);
+        vec3 c1 = vec3(0.106, 0.424, 0.659);
+        vec3 c2 = vec3(0.353, 0.824, 0.957);
+        vec3 c3 = vec3(0.918, 0.976, 1.0);
+        vec3 col = mix(c0, c1, smoothstep(0.10, 0.45, f));
+        col = mix(col, c2, smoothstep(0.42, 0.75, f));
+        col = mix(col, c3, smoothstep(0.78, 0.98, f) * 0.85);
+        gl_FragColor = vec4(col, 1.0);
+      }`;
+
+    const compile = (type, src) => {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { console.warn(gl.getShaderInfoLog(s)); return null; }
+      return s;
+    };
+    const vs = compile(gl.VERTEX_SHADER, VS), fs = compile(gl.FRAGMENT_SHADER, FS);
+    if (!vs || !fs) { fail(); return; }
+    const prog = gl.createProgram();
+    gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { fail(); return; }
+    gl.useProgram(prog);
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, "a");
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const uRes = gl.getUniformLocation(prog, "u_res"), uTime = gl.getUniformLocation(prog, "u_time");
+
+    const SCALE = 0.5;          // рисуем вполовину разрешения: фон мягкий, видеокарте легче
+    let time = 14, last = 0, raf = 0, onScreen = false;
+    const running = () => !motionPaused && onScreen && !document.hidden;
+
+    function draw() {
+      const w = Math.max(2, Math.round(canvas.clientWidth * SCALE));
+      const h = Math.max(2, Math.round(canvas.clientHeight * SCALE));
+      if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; gl.viewport(0, 0, w, h); }
+      gl.uniform2f(uRes, w, h);
+      gl.uniform1f(uTime, time);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+      canvas._t = time;
+    }
+    function loop(now) {
+      if (!running()) { raf = 0; return; }
+      time += last ? Math.min((now - last) / 1000, 0.1) : 0;
+      last = now;
+      draw();
+      raf = requestAnimationFrame(loop);
+    }
+    function update() {
+      if (running()) { if (!raf) { last = 0; raf = requestAnimationFrame(loop); } }
+      else { if (raf) { cancelAnimationFrame(raf); raf = 0; } draw(); }
+    }
+    new IntersectionObserver(entries => { onScreen = entries[0].isIntersecting; update(); }).observe(canvas);
+    document.addEventListener("visibilitychange", update);
+    window.addEventListener("resize", draw);
+    sbtn.addEventListener("click", () => setMotion(!motionPaused));
+    onMotion(p => { sbtn.textContent = p ? "Запустить анимацию фона" : "Остановить анимацию фона"; update(); });
+  })();
+</script>
+<script>
+  // Видеообзоры: нажали — играет со звуком, остальные ставятся на паузу
+  (function () {
+    const vids = document.querySelectorAll(".reel video");
+    vids.forEach(v => {
+      v.addEventListener("click", () => {
+        if (v.paused) { vids.forEach(o => { if (o !== v) o.pause(); }); v.muted = false; v.play(); }
+        else v.pause();
+      });
+      v.addEventListener("play",  () => v.parentElement.classList.add("playing"));
+      v.addEventListener("pause", () => v.parentElement.classList.remove("playing"));
+      v.addEventListener("ended", () => v.parentElement.classList.remove("playing"));
+    });
+  })();
 </script>
 </body>
 </html>
