@@ -158,7 +158,7 @@
     display: grid; place-items: center; text-align: center; padding: 20px; font-size: 17px;
   }
   .photo-slot svg { width: 64px; height: 64px; margin: 0 auto 12px; opacity: .85; }
-  .about-photo { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); border: 6px solid rgba(255,255,255,.9); box-shadow: 0 20px 50px rgba(0,40,55,.3); transform: rotate(-2deg); }
+  .about-photo { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); border: 6px solid rgba(255,255,255,.9); box-shadow: 0 20px 50px rgba(0,40,55,.3); transform: rotate(-2deg); }
   .about .kicker { color: var(--sun); }
   .about p { margin-bottom: 16px; font-size: 18px; }
   .facts { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 28px; }
